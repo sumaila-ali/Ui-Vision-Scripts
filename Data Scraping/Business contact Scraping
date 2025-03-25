@@ -1,0 +1,126 @@
+{
+  "Name": "Business Data Scraping",
+  "CreationDate": "2025-3-25",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": "Ensures the script is not stopped when an error is encountered"
+    },
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": "Ensures the script runs faster on the second iteration if no error is encountered. "
+    },
+    {
+      "Command": "prompt",
+      "Target": "What Alphabets are we scraping today?",
+      "Value": "letter",
+      "Description": "Takes a user imput for the car make"
+    },
+    {
+      "Command": "prompt",
+      "Target": "How many pages are there? ",
+      "Value": "pages",
+      "Description": "Takes a user input for the car model"
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "4000",
+      "Value": "",
+      "Description": "Ensures the page loads fully before proceeding with the next steps as the page has an antibot feature built-in"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(1)",
+      "Value": "currentPage",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${currentPage} <= ${pages}",
+      "Value": "currentPage",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.businessghana.com/site/directory/list-alphabetically/${letter}?page=${currentPage}",
+      "Value": "",
+      "Description": "Visits the site"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(1)",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${currentRow} <= 50",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//h3[@class=\"listing-title\"])[${currentRow}]",
+      "Value": "!csvLine",
+      "Description": "Stores the make and model vin number and colour of the car. "
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"col-md-9 col-sm-8 col-xs-12\"])[${currentRow}]",
+      "Value": "!csvLine",
+      "Description": "TODO"
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=(//h3[@class=\"listing-title\"])[${currentRow}]/a@href",
+      "Value": "!csvLine",
+      "Description": "Stores the sold status of the car"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"col-md-9 col-sm-8\"])[${currentRow}]",
+      "Value": "!csvLine",
+      "Description": "TODO"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"col-md-3 col-sm-4 misc\"])[${currentRow}]",
+      "Value": "!csvLine",
+      "Description": "Scrapes the lot number"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Business Contact Details",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${currentRow} + 1",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${currentPage} + 1",
+      "Value": "currentPage",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
