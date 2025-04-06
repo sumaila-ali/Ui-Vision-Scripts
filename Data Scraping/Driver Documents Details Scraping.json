@@ -1,0 +1,132 @@
+{
+  "Name": "Driver Documents Details Scraping",
+  "CreationDate": "2025-4-6",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://admin.bolt.eu/fleet/DriverRegistration/logs/",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "ali copy driver profile cleanup exercise - master sheet - mimi.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(2)",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${currentRow} <= ${!CSVREADMAXROW}",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${currentRow} ",
+      "Value": "!CSVREADLINENUMBER",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "ali copy driver profile cleanup exercise - master sheet - mimi.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://admin.bolt.eu/fleet/Drivers/driver/${!COL1}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"tab_documents\"]/span",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL1}",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"panelContent_documents\"]/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td[4]",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"panelContent_documents\"]/table/tbody/tr[2]/td/div/table/tbody/tr[3]/td[4]",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // xpath=//*[@id=\"panelContent_documents\"]/table/tbody/tr[2]/td/div/table/tbody/tr[4]/td[4]",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"panelContent_documents\"]/table/tbody/tr[2]/td/div/table/tbody/tr[5]/td[4]",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"panelContent_documents\"]/table/tbody/tr[2]/td/div/table/tbody/tr[6]/td[4]",
+      "Value": "!csvLine",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "click // xpath=//*[@id=\"panelContent_documents\"]/table/tbody/tr[2]/td/div/table/tbody/tr[7]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Driver Details",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${currentRow} ",
+      "Value": "!CSVREADLINENUMBER",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${currentRow} + 1",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
