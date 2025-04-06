@@ -1,0 +1,102 @@
+{
+  "Name": "Rider details scraping",
+  "CreationDate": "2025-4-6",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": "Ignores errors when the code encouters one. "
+    },
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": "Needed to improve speed of the code on subsequent runs"
+    },
+    {
+      "Command": "csvRead",
+      "Target": "ui vision test - sheet1.csv",
+      "Value": "",
+      "Description": "Name of the csv file to assess the length of the dataset"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(2)",
+      "Value": "currentRow",
+      "Description": "Which row to start the script on. "
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${currentRow} <= ${!CSVREADMAXROW}",
+      "Value": "currentRow",
+      "Description": "The "
+    },
+    {
+      "Command": "store",
+      "Target": "${currentRow}",
+      "Value": "!CSVREADLINENUMBER",
+      "Description": "The "
+    },
+    {
+      "Command": "csvRead",
+      "Target": "ui vision test - sheet1.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "open // https://admin.bolt.eu/user/Users/user/70980071",
+      "Value": "",
+      "Description": "Visits the rider profile"
+    },
+    {
+      "Command": "open",
+      "Target": "https://admin.bolt.eu/user/Users/user/${!COL1}",
+      "Value": "",
+      "Description": "Visits the rider profile"
+    },
+    {
+      "Command": "storeValue",
+      "Target": "xpath=(//input[@class=\"fg_textField\"])[2]",
+      "Value": "!csvLine",
+      "Description": "Copies the user's first name"
+    },
+    {
+      "Command": "storeValue",
+      "Target": "xpath=(//input[@class=\"fg_textField\"])[3]",
+      "Value": "!csvLine",
+      "Description": "Copies the user's last name"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"fg_value\"])[1]",
+      "Value": "!csvLine",
+      "Description": "Copies the user's phone number"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "rider details",
+      "Value": "",
+      "Description": "Saves the file to a CSV"
+    },
+    {
+      "Command": "store",
+      "Target": "${currentRow}",
+      "Value": "!CSVREADLINENUMBER",
+      "Description": "Copies the user's phone number"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${currentRow} + 1",
+      "Value": "currentRow",
+      "Description": "Increases the counter for for the next run"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
