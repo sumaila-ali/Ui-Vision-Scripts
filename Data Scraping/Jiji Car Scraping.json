@@ -1,0 +1,174 @@
+{
+  "Name": "Jiji Car Scraping",
+  "CreationDate": "2025-4-6",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorignore",
+      "Description": "Ensures the script is not stopped when an error is encountered"
+    },
+    {
+      "Command": "store",
+      "Target": "fast",
+      "Value": "!replayspeed",
+      "Description": "Ensures the script runs faster on the second iteration if no error is encountered. "
+    },
+    {
+      "Command": "open",
+      "Target": "https://jiji.com.gh/",
+      "Value": "",
+      "Description": "Visits the site"
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "4000",
+      "Value": "",
+      "Description": "Ensures the page loads fully before proceeding with the next steps as the page has an antibot feature built-in"
+    },
+    {
+      "Command": "prompt",
+      "Target": "What car make do you want to scrap? ",
+      "Value": "make",
+      "Description": "Takes a user imput for the car make"
+    },
+    {
+      "Command": "prompt",
+      "Target": "What car model do you want to scrap? ",
+      "Value": "model",
+      "Description": "Takes a user input for the car model"
+    },
+    {
+      "Command": "prompt",
+      "Target": "What's the minimum year of the make and model do you want to scrap? ",
+      "Value": "min_year",
+      "Description": "Takes a user input for the car year"
+    },
+    {
+      "Command": "prompt",
+      "Target": "What's the maximum year of the make and model do you want to scrap? ",
+      "Value": "max_year",
+      "Description": "Takes a user input for the car year"
+    },
+    {
+      "Command": "prompt",
+      "Target": "What's the mininum price do you want to scrap? ",
+      "Value": "min_price",
+      "Description": "Takes a user input for the car year"
+    },
+    {
+      "Command": "prompt",
+      "Target": "What's the maximum price you want to scrap? ",
+      "Value": "max_price",
+      "Description": "Takes a user input for the car year"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(1)",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://jiji.com.gh/cars?filter_attr_119_year_of_manufacture__min=${min_year}&filter_attr_119_year_of_manufacture__max=${max_year}&price_min=${min_price}&price_max=${max_price}&filter_attr_1_make=${make}&filter_attr_2_model=${model}",
+      "Value": "",
+      "Description": "Visits the site"
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "4000",
+      "Value": "",
+      "Description": "Ensures the page loads fully before proceeding with the next steps as the page has an antibot feature built-in"
+    },
+    {
+      "Command": "prompt",
+      "Target": "Are you ready to scrape? ",
+      "Value": "",
+      "Description": "Takes a user input for the car year"
+    },
+    {
+      "Command": "storeXpathCount",
+      "Target": "xpath=//div[@class=\"b-list-advert__gallery__item js-advert-list-item\"]",
+      "Value": "cars",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${currentRow} <= ${cars}",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number(1)",
+      "Value": "buttom",
+      "Description": "Stores the price of the car"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"qa-advert-price\"])[${CurrentRow}]",
+      "Value": "!csvLine",
+      "Description": "Stores the price of the car"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"b-advert-title-inner qa-advert-title b-advert-title-inner--div\"])[${CurrentRow}]",
+      "Value": "!csvLine",
+      "Description": "TODO"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"b-list-advert-base__description-text\"])[${CurrentRow}]",
+      "Value": "!csvLine",
+      "Description": "Stores the sold status of the car"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//span[@class=\"b-list-advert__region__text\"])[${currentRow}]",
+      "Value": "!csvLine",
+      "Description": "TODO"
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"b-list-advert-base__item-attr\"])[${buttom}]",
+      "Value": "!csvLine",
+      "Description": "Scrapes the lot number"
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${buttom} + 1",
+      "Value": "buttom",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=(//div[@class=\"b-list-advert-base__item-attr\"])[${buttom}]",
+      "Value": "!csvLine",
+      "Description": "Scrapes the lot number"
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "xpath=(//div[@class=\"b-list-advert__gallery__item js-advert-list-item\"]/a)[${currentRow}]@href",
+      "Value": "!csvLine",
+      "Description": "Scrapes the link to the add"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "Jiji",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return ${currentRow} + 1",
+      "Value": "currentRow",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
