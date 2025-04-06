@@ -16,13 +16,13 @@
     },
     {
       "Command": "open",
-      "Target": "https://admin.bolt.eu/fleet/DriverRegistration/logs/",
+      "Target": "https://admin.******.eu/fleet/DriverRegistration/logs/",
       "Value": "",
       "Description": ""
     },
     {
       "Command": "csvRead",
-      "Target": "ali copy driver profile cleanup exercise - master sheet - mimi.csv",
+      "Target": "sample.csv",
       "Value": "",
       "Description": ""
     },
@@ -46,13 +46,13 @@
     },
     {
       "Command": "csvRead",
-      "Target": "ali copy driver profile cleanup exercise - master sheet - mimi.csv",
+      "Target": "sample.csv",
       "Value": "",
       "Description": ""
     },
     {
       "Command": "open",
-      "Target": "https://admin.bolt.eu/fleet/Drivers/driver/${!COL1}",
+      "Target": "https://admin.******.eu/fleet/Drivers/driver/${!COL1}",
       "Value": "",
       "Description": ""
     },
